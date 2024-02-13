@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grade Calculator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="container">
+
+    <label for="qartulis_qula">Qartulis qula:</label>
+    <input type="number" id="qartulis_qula" step="0.01"><br>
+    <label for="inglisuris_qula">Inglisuris qula:</label>
+    <input type="number" id="inglisuris_qula" step="0.01"><br>
+    <label for="subject">Subject:</label>
+    <select id="subject">
+      <option value="" disabled selected>Select Subject</option>
+      <option value="matematika">Matematika</option>
+      <option value="istoria">Istoria</option>
+    </select><br>
+    <div id="optional_subject_container"></div><br>
+    <button onclick="calculate()">Calculate</button><br>
+    <div id="result"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
