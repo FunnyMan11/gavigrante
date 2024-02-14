@@ -10,19 +10,18 @@
 
 <body>
   <div class="container">
-
-    <label for="qartulis_qula">Qartulis qula:</label>
-    <input type="number" id="qartulis_qula" step="0.01"><br>
-    <label for="inglisuris_qula">Inglisuris qula:</label>
-    <input type="number" id="inglisuris_qula" step="0.01"><br>
-    <label for="subject">Subject:</label>
+    <label for="qartulis_qula">ქართულის ქულა:</label>
+    <input type="number" id="qartulis_qula" step="1"><br>
+    <label for="inglisuris_qula">ინგლისურის ქულა:</label>
+    <input type="number" id="inglisuris_qula" step="1"><br>
+    <label for="subject">არჩევითი საგანი:</label>
     <select id="subject">
-      <option value="" disabled selected>Select Subject</option>
-      <option value="matematika">Matematika</option>
-      <option value="istoria">Istoria</option>
+      <option value="" disabled selected>არჩევა</option>
+      <option value="matematika">მათემატიკა</option>
+      <option value="istoria">ისტორია</option>
     </select><br>
     <div id="optional_subject_container"></div><br>
-    <button onclick="calculate()">Calculate</button><br>
+    <button onclick="calculate()">გამოთვლა</button><br>
     <div id="result"></div>
   </div>
 

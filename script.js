@@ -17,30 +17,30 @@ function calculate() {
     var n = (n11 + n22 + (subject === "matematika" ? 1.5 * n33 : 0) + (subject === "istoria" ? 1.5 * n44 : 0)) * 10;
   
     var resultDiv = document.getElementById("result");
-    resultDiv.innerHTML = "Qartulis skalirebuli qulaa: " + n11.toFixed(2) + "<br>" + 
-                          "Inglisuris skalirebuli qulaa: " + n22.toFixed(2) + "<br>";
+    resultDiv.innerHTML = "ქართულის სკალირებული ქულაა: " + n11.toFixed(2) + "<br>" + 
+                          "ინგლისურის სკალირებული ქულაა: " + n22.toFixed(2) + "<br>";
   
     if (subject === "matematika") {
-      resultDiv.innerHTML += "Matematikis skalirebuli qulaa: " + n33.toFixed(2) + "<br>";
+      resultDiv.innerHTML += "მათემატიკის სკალირებული ქულაა: " + n33.toFixed(2) + "<br>";
       if (n < 5713.5) {
-        resultDiv.innerHTML += "Samwuxarod ver moipovet granti.";
+        resultDiv.innerHTML += "სამწუხაროდ თქვენ ვერ მოიპოვეთ გრანტი";
       } else if (n < 5965.5) {
-        resultDiv.innerHTML += "Tqven moipoet 50%-iani granti.";
+        resultDiv.innerHTML += "გილოცავთ, თქვენ მოიპოვეთ 50%-იანი გრანტი";
       } else if (n < 6141.5) {
-        resultDiv.innerHTML += "Tqven moipovet 70%-iani granti.";
+        resultDiv.innerHTML += "გილოცავთ, თქვენ მოიპოვეთ 70%-იანი გრანტი";
       } else {
-        resultDiv.innerHTML += "Tqven moipovet 100%-iani granti.";
+        resultDiv.innerHTML += "გილოცავთ, თქვენ მოიპოვეთ 100%-იანი გრანტი";
       }
     } else if (subject === "istoria") {
-      resultDiv.innerHTML += "Istoriis skalirebuli qulaa: " + n44.toFixed(2) + "<br>";
+      resultDiv.innerHTML += "ისტორიის სკალირებული ქულაა: " + n44.toFixed(2) + "<br>";
       if (n < 5804.0) {
-        resultDiv.innerHTML += "Samwuxarod ver moipovet granti.";
+        resultDiv.innerHTML += "სამწუხაროდ თქვენ ვერ მოიპოვეთ გრანტი.";
       } else if (n < 5968.5) {
-        resultDiv.innerHTML += "Tqven moipoet 50%-iani granti.";
+        resultDiv.innerHTML += "სამწუხაროდ თქვენ ვერ მოიპოვეთ გრანტი";
       } else if (n < 6060.0) {
-        resultDiv.innerHTML += "Tqven moipovet 70%-iani granti.";
+        resultDiv.innerHTML += "გილოცავთ, თქვენ მოიპოვეთ 70%-იანი გრანტი";
       } else {
-        resultDiv.innerHTML += "Tqven moipovet 100%-iani granti.";
+        resultDiv.innerHTML += "გილოცავთ, თქვენ მოიპოვეთ 100%-იანი გრანტი";
       }
     }
   
@@ -54,11 +54,11 @@ function calculate() {
     container.innerHTML = "";
   
     if (subject === "matematika") {
-      container.innerHTML = '<label for="matematikis_qula">Matematikis qula:</label>' +
-                            '<input type="number" id="matematikis_qula" step="0.01"><br>';
+      container.innerHTML = '<label for="matematikis_qula">მათემატიკის ქულა:</label>' +
+                            '<input type="number" id="matematikis_qula" step="1"><br>';
     } else if (subject === "istoria") {
-      container.innerHTML = '<label for="istoriis_qula">Istoriis qula:</label>' +
-                            '<input type="number" id="istoriis_qula" step="0.01"><br>';
+      container.innerHTML = '<label for="istoriis_qula">ისტორიის ქულა</label>' +
+                            '<input type="number" id="istoriis_qula" step="1"><br>';
     }
   });
   
