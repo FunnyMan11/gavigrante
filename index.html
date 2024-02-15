@@ -1,31 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Grade Calculator</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
   <div class="container">
-    <label for="qartulis_qula">ქართულის ქულა:</label>
-    <input type="number" id="qartulis_qula" step="1"><br>
-    <label for="inglisuris_qula">ინგლისურის ქულა:</label>
-    <input type="number" id="inglisuris_qula" step="1"><br>
-    <label for="subject">არჩევითი საგანი:</label>
-    <select id="subject">
-      <option value="" disabled selected>არჩევა</option>
-      <option value="matematika">მათემატიკა</option>
-      <option value="istoria">ისტორია</option>
-    </select><br>
-    <div id="optional_subject_container"></div><br>
-    <button onclick="calculate()">გამოთვლა</button><br>
-    <div id="result"></div>
+    <div class="selective">
+      <label for="qartulis_qula">ქართულის ქულა:</label>
+      <input type="number" id="qartulis_qula" step="1"><br>
+      <label for="inglisuris_qula">ინგლისურის ქულა:</label>
+      <input type="number" id="inglisuris_qula" step="1"><br>
+      <label for="subject">არჩევითი საგანი:</label>
+      <select id="subject">
+        <option value="" disabled selected>არჩევა</option>
+        <option value="matematika">მათემატიკა</option>
+        <option value="istoria">ისტორია</option>
+      </select><br>
+      <div id="optional_subject_container"></div><br>
+      <button id="calculateBtn">გამოთვლა</button><br>
+    </div>
+    <div class="result"></div>
   </div>
 
   <script src="script.js"></script>
 </body>
-
 </html>
