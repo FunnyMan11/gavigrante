@@ -18,29 +18,33 @@ document.getElementById("calculateBtn").addEventListener("click", function () {
     return
   }
 
-
   // Get input values
   var subject = document.getElementById("subject").value;
   n1 = parseFloat(document.getElementById("qartulis_qula").value);
   n2 = parseFloat(document.getElementById("inglisuris_qula").value);
 
   // Calculate optional subject grades if applicable
-  if (subject === "matematika") {
-    if (document.getElementById("matematikis_qula").value == "") {
-      alert('გთხოვთ შეიყვანოთ მათემატიკის ქულა')
-      return
-    } else {
-      n3 = parseFloat(document.getElementById("matematikis_qula").value);
-      n33 = 15 * (59 * n3 / 51 - 22.928) / 12.251 + 150;
+  if (subject !== "") {
+    if (subject === "matematika") {
+      if (document.getElementById("matematikis_qula").value == "") {
+        alert('გთხოვთ შეიყვანოთ მათემატიკის ქულა')
+        return
+      } else {
+        n3 = parseFloat(document.getElementById("matematikis_qula").value);
+        n33 = 15 * (59 * n3 / 51 - 22.928) / 12.251 + 150;
+      }
+    } else if (subject === "istoria") {
+      if (document.getElementById("istoriis_qula").value == "") {
+        alert('გთხოვთ შეიყვანოთ ისტორიის ქულა')
+        return
+      } else {
+        n4 = parseFloat(document.getElementById("istoriis_qula").value);
+        n44 = 15 * (59 * n4 / 60 - 30.928) / 12.251 + 150; // 185 129
+      }
     }
-  } else if (subject === "istoria") {
-    if (document.getElementById("istoriis_qula").value == "") {
-      alert('გთხოვთ შეიყვანოთ ისტორიის ქულა')
-      return
-    } else {
-      n4 = parseFloat(document.getElementById("istoriis_qula").value);
-      n44 = 15 * (59 * n4 / 60 - 30.928) / 12.251 + 150; // 185 129
-    }
+  } else {
+    alert("გთხოვთ აირჩიოთ არჩევითი საგანი")
+    return;
   }
 
   selective.classList.add('none')
@@ -51,37 +55,39 @@ document.getElementById("calculateBtn").addEventListener("click", function () {
   var n = (n11 + n22 + (subject === "matematika" ? 1.5 * n33 : 0) + (subject === "istoria" ? 1.5 * n44 : 0)) * 10;
 
   // Display the result
-  resultDiv.innerHTML = "ქართულის სკალირებული ქულაა: " + n11.toFixed(2) + "<br>" +
-    "ინგლისურის სკალირებული ქულაა: " + n22.toFixed(2) + "<br>";
+  resultDiv.innerHTML += `<p> ქართულის სკალირებული ქულაა ${n11.toFixed(2)} </p>`
+  resultDiv.innerHTML += `<p> ინგლისურის სკალირებული ქულაა ${n22.toFixed(2)} </p>`
 
   if (subject === "matematika") {
-    resultDiv.innerHTML += "მათემატიკის სკალირებული ქულაა: " + n33.toFixed(2) + "<br>";
+    resultDiv.innerHTML += `<p> მათემატიკის სკალირებული ქულაა ${n33.toFixed(2)} </p>`
+    resultDiv.innerHTML += `<p> თქვენი საგრანტო ქულაა ${n.toFixed(2)} </p>`;
     if (n < 5713.5) {
-      resultDiv.innerHTML += "სამწუხაროდ თქვენ ვერ მოიპოვეთ გრანტი";
+      resultDiv.innerHTML += " <div style='background-color: #91a3b0' > სამწუხაროდ თქვენ ვერ მოიპოვეთ გრანტი </div>";
     } else if (n < 5965.5) {
-      resultDiv.innerHTML += "გილოცავთ, თქვენ მოიპოვეთ 50%-იანი გრანტი";
+      resultDiv.innerHTML += "<div>გილოცავთ, თქვენ მოიპოვეთ 50%-იანი გრანტი </div>";
     } else if (n < 6141.5) {
-      resultDiv.innerHTML += "გილოცავთ, თქვენ მოიპოვეთ 70%-იანი გრანტი";
+      resultDiv.innerHTML += "<div> გილოცავთ, თქვენ მოიპოვეთ 70%-იანი გრანტი </div>";
     } else {
-      resultDiv.innerHTML += "გილოცავთ, თქვენ მოიპოვეთ 100%-იანი გრანტი";
+      resultDiv.innerHTML += "<div>გილოცავთ, თქვენ მოიპოვეთ 100%-იანი გრანტი </div>";
     }
   } else if (subject === "istoria") {
-    resultDiv.innerHTML += "ისტორიის სკალირებული ქულაა: " + n44.toFixed(2) + "<br>";
+    resultDiv.innerHTML += `<p> ისტორიის სკალირებული ქულაა ${n44.toFixed(2)} </p>`
+    resultDiv.innerHTML += `<p> თქვენი საგრანტო ქულაა ${n.toFixed(2)} </p>`;
     if (n < 5804.0) {
-      resultDiv.innerHTML += "სამწუხაროდ თქვენ ვერ მოიპოვეთ გრანტი.";
+      resultDiv.innerHTML += "<div style='background-color: #91a3b0'>სამწუხაროდ თქვენ ვერ მოიპოვეთ გრანტი. </div>";
     } else if (n < 5968.5) {
-      resultDiv.innerHTML += "სამწუხაროდ თქვენ ვერ მოიპოვეთ გრანტი";
+      resultDiv.innerHTML += "<div'>თქვენ მოიპოვეთ 50%-იანი გრანტი </div>";
     } else if (n < 6060.0) {
-      resultDiv.innerHTML += "გილოცავთ, თქვენ მოიპოვეთ 70%-იანი გრანტი";
+      resultDiv.innerHTML += "<div>გილოცავთ, თქვენ მოიპოვეთ 70%-იანი გრანტი </div>";
     } else {
-      resultDiv.innerHTML += "გილოცავთ, თქვენ მოიპოვეთ 100%-იანი გრანტი";
+      resultDiv.innerHTML += "<div>გილოცავთ, თქვენ მოიპოვეთ 100%-იანი გრანტი </div>";
     }
   }
-  
-  resultDiv.innerHTML += " თქვენი საგრანტო ქულაა " + n.toFixed(2) + "<br>";
+
+
 
   const againBtn = document.createElement('button');
-  resultDiv.appendChild(againBtn);  
+  resultDiv.appendChild(againBtn);
   againBtn.textContent = "ახლიდან ცდა";
 
   againBtn.addEventListener('click', function () {
@@ -115,10 +121,12 @@ document.getElementById("subject").addEventListener("change", function () {
   optionalContainer.innerHTML = "";
 
   if (subject === "matematika") {
-    optionalContainer.innerHTML = '<label for="matematikis_qula">მათემატიკის ქულა:</label>' +
+    optionalContainer.innerHTML =
+      '<label for="matematikis_qula">მათემატიკის ქულა:</label>' +
       '<input type="number" id="matematikis_qula" step="1"><br>';
   } else if (subject === "istoria") {
-    optionalContainer.innerHTML = '<label for="istoriis_qula">ისტორიის ქულა</label>' +
+    optionalContainer.innerHTML =
+      '<label for="istoriis_qula">ისტორიის ქულა</label>' +
       '<input type="number" id="istoriis_qula" step="1"><br>';
   }
 });
