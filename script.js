@@ -130,3 +130,19 @@ document.getElementById("subject").addEventListener("change", function () {
       '<input type="number" id="istoriis_qula" step="1"><br>';
   }
 });
+
+// Function to delete the welcome message
+document.getElementById("deleteMessageBtn").addEventListener("click", function () {
+  var welcomeMessage = document.getElementById("welcomeMessage");
+  var overlay = document.getElementById("overlay");
+  welcomeMessage.style.display = "none";
+  overlay.style.display = "none";
+});
+
+// Show welcome message when the page loads
+window.onload = function () {
+  var welcomeMessage = document.getElementById("welcomeMessage");
+  var overlay = document.getElementById("overlay");
+  welcomeMessage.style.display = "block";
+  overlay.style.display = "block";
+};

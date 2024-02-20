@@ -1,12 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Grade Calculator</title>
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
+  <div id="overlay"></div>
+  <div class="center">
+    <div class="welcome-message" id="welcomeMessage">
+      <div class="okay">
+        <h1>გავიგრანტე ?</h1>
+        <p>
+          მოგეხსენებათ, რომ აღნიშნული აპლიკაცია 100% იანი სიზუსტით ვერ გამოთვლის გრანტს. გრანტის მიღება დამოკიდებულია სხვა
+          აბიტურიენტების რაოდენობასა და კონკურენციაზე.
+          აპლიკაცია შექმნილია 2023 წლის შედეგების მიხედვით, იხილეთ დეტალური ინფორმაცია სკალირებული ქულის გამოთვლის მეთოდის
+          შესახებ.
+        </p>
+        <button id="deleteMessageBtn">დაწყება</button>
+      </div>
+  </div>
+  </div>
   <div class="container">
     <div class="selective">
       <label for="qartulis_qula">ქართულის ქულა:</label>
@@ -27,4 +44,5 @@
 
   <script src="script.js"></script>
 </body>
+
 </html>
