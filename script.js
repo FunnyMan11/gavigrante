@@ -1,5 +1,5 @@
 // Declare global variables
-var n1, n2, n3, n4, n33, n44;
+var n1, n2, n3, n4, n33, n44
 var calculations = [];
 
 // Event listener for the "Calculate" button
@@ -38,13 +38,13 @@ document.getElementById("calculateBtn").addEventListener("click", function () {
   // Calculate optional subject grades if applicable
   if (subject !== "") {
     if (subject === "matematika") {
-      if (document.getElementById("matematikis_qula").value == "" ) {
+      if (document.getElementById("matematikis_qula").value == "" ){
         alert('გთხოვთ შეიყვანოთ მათემატიკის ქულა')
         return;
-      };
+      }
       if (document.getElementById("matematikis_qula").value < 11 || document.getElementById("matematikis_qula").value > 51) {
         alert(`გთხოვთ შეიყვანოთ ქულა 11-იდან 51-მდე, შეყვანილი ქულა ${document.getElementById("matematikis_qula").value}`)
-        return
+        return;
       } else {
         n3 = parseFloat(document.getElementById("matematikis_qula").value);
         n33 = 15 * (59 * n3 / 51 - 22.928) / 12.251 + 150;
@@ -79,31 +79,79 @@ document.getElementById("calculateBtn").addEventListener("click", function () {
   resultDiv.innerHTML += `<p> ინგლისურის სკალირებული ქულაა ${n22.toFixed(2)} </p>`
 
   if (subject === "matematika") {
-    resultDiv.innerHTML += `<p> მათემატიკის სკალირებული ქულაა ${n33.toFixed(2)} </p>`
+    resultDiv.innerHTML += `<p> მათემატიკის სკალირებული ქულაა ${n33.toFixed(2)} </p>`;
     resultDiv.innerHTML += `<p> თქვენი საგრანტო ქულაა ${n.toFixed(2)} </p>`;
     if (n < 5713.5) {
+      grantP = "არ აქვს"
       resultDiv.innerHTML += " <div style='background-color: #91a3b0' > სამწუხაროდ თქვენ ვერ მოიპოვეთ გრანტი </div>";
     } else if (n < 5965.5) {
-      resultDiv.innerHTML += "<div>თქვენ მოიპოვეთ 50%-იანი გრანტი </div>";
+      grantP = '50%';
+      resultDiv.innerHTML += `<div>თქვენ მოიპოვეთ ${grantP}-იანი გრანტი </div>`;
     } else if (n < 6141.5) {
-      resultDiv.innerHTML += "<div>თქვენ მოიპოვეთ 70%-იანი გრანტი </div>";
+      grantP = '70%'
+      resultDiv.innerHTML += `<div>თქვენ მოიპოვეთ ${grantP}-იანი გრანტი </div>`;
     } else {
-      resultDiv.innerHTML += "<div>თქვენ მოიპოვეთ 100%-იანი გრანტი </div>";
+      grantP = '100%';
+      resultDiv.innerHTML += `<div>თქვენ მოიპოვეთ ${grantP}-იანი გრანტი </div>`;
     }
   } else if (subject === "istoria") {
     resultDiv.innerHTML += `<p> ისტორიის სკალირებული ქულაა ${n44.toFixed(2)} </p>`
     resultDiv.innerHTML += `<p> თქვენი საგრანტო ქულაა ${n.toFixed(2)} </p>`;
     if (n < 5804.0) {
+      grantP = "არ აქვს"
       resultDiv.innerHTML += "<div style='background-color: #91a3b0'>სამწუხაროდ თქვენ ვერ მოიპოვეთ გრანტი. </div>";
     } else if (n < 5968.5) {
-      resultDiv.innerHTML += "<div>თქვენ მოიპოვეთ 50%-იანი გრანტი </div>";
+      grantP = '50%'
+      resultDiv.innerHTML += `<div>თქვენ მოიპოვეთ ${grantP}-იანი გრანტი </div>`;
     } else if (n < 6060.0) {
-      resultDiv.innerHTML += "<div>თქვენ მოიპოვეთ 70%-იანი გრანტი </div>";
+      grantP = '70%'
+      resultDiv.innerHTML += `<div>თქვენ მოიპოვეთ ${grantP}-იანი გრანტი </div>`;
     } else {
-      resultDiv.innerHTML += "<div>თქვენ მოიპოვეთ 100%-იანი გრანტი </div>";
+      grantP = '100%'
+      resultDiv.innerHTML += `<div>თქვენ მოიპოვეთ ${grantP}-იანი გრანტი </div>`;
     }
-    
   }
+
+  var archeviti_qula;
+
+  if(subject === "matematika"){
+    archeviti_qula =  document.getElementById('matematikis_qula').value
+  } else {
+    archeviti_qula = document.getElementById('istoriis_qula').value;
+  }
+  
+  // Store current calculation
+  var currentCalculation = {
+    qartulis_qula: document.getElementById('qartulis_qula').value,
+    inglisuris_qula: document.getElementById('inglisuris_qula').value,
+    archeviti_qula: archeviti_qula,
+    qartulis_skalirebuli: n11.toFixed(2),
+    inglisuris_skalirebuli: n22.toFixed(2),
+    matematikis_skalirebuli: subject === "matematika" ? n33.toFixed(2) : null,
+    istoriis_skalirebuli: subject === "istoria" ? n44.toFixed(2) : null,
+    n33: subject === "matematika" ? n33.toFixed(2) : null,
+    n44: subject === "istoria" ? n44.toFixed(2) : null,
+    total: n.toFixed(2),
+    grantP: grantP
+  };
+
+
+  // Add current calculation to the calculations array
+  calculations.push(currentCalculation);
+
+  // Display all calculations
+  const prevCalc = document.getElementById('prevCalc');
+  prevCalc.innerHTML = "";
+  calculations.forEach((calculation, index) => {
+    prevCalc.innerHTML += `<p><strong>Calculation ${index + 1}</strong></p>`;
+    prevCalc.innerHTML += `<p>ქართული ${calculation.qartulis_qula} -- ს / ქ  ${calculation.qartulis_skalirebuli}</p>`;
+    prevCalc.innerHTML += `<p>ინგლისური ${calculation.inglisuris_qula} -- ს / ქ  ${calculation.inglisuris_skalirebuli}</p>`;
+    prevCalc.innerHTML += `<p>${subject === "matematika" ? `მათემატიკა ${calculation.archeviti_qula} ს / ქ  ${calculation.n33}` : `ისტორიის ${calculation.archeviti_qula} ს / ქ  ${calculation.n44}`}</p>`;
+    prevCalc.innerHTML += `<p>თქვენი საგრანტო ქულაა ${calculation.total}</p>`;
+    prevCalc.innerHTML += `<p style="color: ${calculation.grantP !== 'არ აქვს' ? 'green' : 'red'};"> გრანტი - ${calculation.grantP} </p>`;
+  });
+  resultDiv.classList.remove('none');
+
 
   const againBtn = document.createElement('button');
   resultDiv.appendChild(againBtn);
@@ -182,21 +230,33 @@ document.getElementById("generateBtn").addEventListener("click", function () {
   }
 });
 
-
-
+function toggleMenu() {
+  var element = document.getElementById("prevCalc");
+  var burgerMenu = document.getElementById("burgerMenu");
+  element.classList.toggle("show");
+  if (element.classList.contains("show")) {
+    burgerMenu.innerHTML =`<i class="fa-solid fa-x"></i>`;
+    burgerMenu.style.backgroundColor = 'transparent'
+    burgerMenu.style.fontSize ="30px"
+  } else {
+    burgerMenu.innerHTML = ` ისტორია <i class="fa-solid fa-caret-down"></i>`;
+    burgerMenu.style.backgroundColor = ''
+    burgerMenu.style.fontSize =""
+  }
+}
 
 // Function to delete the welcome message
-document.getElementById("deleteMessageBtn").addEventListener("click", function () {
-  var welcomeMessage = document.getElementById("welcomeMessage");
-  var overlay = document.getElementById("overlay");
-  welcomeMessage.style.display = "none";
-  overlay.style.display = "none";
-});
+// document.getElementById("deleteMessageBtn").addEventListener("click", function () {
+//   var welcomeMessage = document.getElementById("welcomeMessage");
+//   var overlay = document.getElementById("overlay");
+//   welcomeMessage.style.display = "none";
+//   overlay.style.display = "none";
+// });
 
-// Show welcome message when the page loads
-window.onload = function () {
-  var welcomeMessage = document.getElementById("welcomeMessage");
-  var overlay = document.getElementById("overlay");
-  welcomeMessage.style.display = "block";
-  overlay.style.display = "block";
-};
+// // Show welcome message when the page loads
+// window.onload = function () {
+//   var welcomeMessage = document.getElementById("welcomeMessage");
+//   var overlay = document.getElementById("overlay");
+//   welcomeMessage.style.display = "block";
+//   overlay.style.display = "block";
+// };
