@@ -114,17 +114,11 @@ document.getElementById("calculateBtn").addEventListener("click", function () {
 
   var archeviti_qula;
 
-  if(subject === "matematika"){
-    archeviti_qula =  document.getElementById('matematikis_qula').value
-  } else {
-    archeviti_qula = document.getElementById('istoriis_qula').value;
-  }
-  
   // Store current calculation
   var currentCalculation = {
     qartulis_qula: document.getElementById('qartulis_qula').value,
     inglisuris_qula: document.getElementById('inglisuris_qula').value,
-    archeviti_qula: archeviti_qula,
+    archeviti_qula: subject === "matematika" ? document.getElementById('matematikis_qula').value : document.getElementById('istoriis_qula').value,
     qartulis_skalirebuli: n11.toFixed(2),
     inglisuris_skalirebuli: n22.toFixed(2),
     matematikis_skalirebuli: subject === "matematika" ? n33.toFixed(2) : null,
@@ -143,12 +137,13 @@ document.getElementById("calculateBtn").addEventListener("click", function () {
   const prevCalc = document.getElementById('prevCalc');
   prevCalc.innerHTML = "";
   calculations.forEach((calculation, index) => {
-    prevCalc.innerHTML += `<p><strong>Calculation ${index + 1}</strong></p>`;
+    prevCalc.innerHTML += `<p><strong>კალკულაცია ${index + 1}</strong></p>`;
     prevCalc.innerHTML += `<p>ქართული ${calculation.qartulis_qula} -- ს / ქ  ${calculation.qartulis_skalirebuli}</p>`;
     prevCalc.innerHTML += `<p>ინგლისური ${calculation.inglisuris_qula} -- ს / ქ  ${calculation.inglisuris_skalirebuli}</p>`;
-    prevCalc.innerHTML += `<p>${subject === "matematika" ? `მათემატიკა ${calculation.archeviti_qula} ს / ქ  ${calculation.n33}` : `ისტორიის ${calculation.archeviti_qula} ს / ქ  ${calculation.n44}`}</p>`;
+    prevCalc.innerHTML += `<p>${subject === "matematika" ? `მათემატიკა ${calculation.archeviti_qula} -- ს / ქ  ${calculation.n33}` : `ისტორიის ${calculation.archeviti_qula} -- ს / ქ  ${calculation.n44}`}</p>`;
     prevCalc.innerHTML += `<p>თქვენი საგრანტო ქულაა ${calculation.total}</p>`;
     prevCalc.innerHTML += `<p style="color: ${calculation.grantP !== 'არ აქვს' ? 'green' : 'red'};"> გრანტი - ${calculation.grantP} </p>`;
+    prevCalc.innerHTML += `<hr>`
   });
   resultDiv.classList.remove('none');
 
@@ -244,6 +239,35 @@ function toggleMenu() {
     burgerMenu.style.fontSize =""
   }
 }
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Fetch the data from data.json
+  fetch("data.json")
+    .then(response => response.json())
+    .then(data => {
+      // Get the quotes array from data
+      const quotes = data.quotes;
+
+      // Function to display a random quote
+      function displayRandomQuote() {
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        const randomQuote = quotes[randomIndex];
+
+        // Update the HTML with the random quote
+        document.getElementById("quote-text").textContent = `"${randomQuote.quote}"`;
+        document.getElementById("quote-author").textContent = `- ${randomQuote.author}`;
+      }
+
+      // Display a random quote initially
+      displayRandomQuote();
+
+      // Set interval to change the quote every 30 seconds
+      setInterval(displayRandomQuote, 15000);
+    })
+    .catch(error => console.error("Error fetching data:", error));
+});
+
 
 // Function to delete the welcome message
 // document.getElementById("deleteMessageBtn").addEventListener("click", function () {
