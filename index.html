@@ -10,7 +10,18 @@
 </head>
 
 <body>
-  <button class="burger-menu" id="burgerMenu" onclick="toggleMenu()"> ისტორია <i class="fa-solid fa-caret-down"></i> </button>
+  <div class="header">
+    <div class="header-list">
+      <ol>
+        <li><a href="./">მთავარი</a></li>
+        <li><a href="">პოსტები</a></li>
+        <li><a href="">კონტაქტი</a></li>
+        <li><a href="">რეგისტრაცია</a></li>
+      </ol>
+      <button class="mode-change" id="modeChange">Dark Mode</button>
+    </div>
+    <button class="burger-menu" id="burgerMenu" onclick="toggleMenu()"> <i class="fa-solid fa-list-ol"></i></i> </button>
+  </div>
   <div class="previous-calculations" id="prevCalc">
     <h2>არ არის მონაცემი</h2>
   </div>
@@ -51,6 +62,9 @@
     </div>
     <div class="result"></div>
   </div>
+  <!-- <footer>
+    <h3>copyright Piro Kobuladze</h3>
+  </footer> -->
   <script src="script.js"></script>
 </body>
 
