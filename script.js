@@ -1,9 +1,43 @@
 // Declare global variables
 var n1, n2, n3, n4, n33, n44;
 var calculations = [];
+var calculationCounter = 0;
+
+document.addEventListener("DOMContentLoaded", function() {
+  const box = document.getElementById('box');
+
+  // Show the box immediately
+  box.style.opacity = 1;
+
+  // Hide the box after 3 seconds
+  setTimeout(() => {
+    // Apply transition for smooth disappearing
+    box.style.transition = "opacity 1s ease";
+    box.style.opacity = 0;
+
+    // Remove the box from the DOM after the transition completes
+    setTimeout(() => {
+      document.body.removeChild(box);
+    }, 1000); // Adjust this value to match the transition duration
+  }, 4000);
+});
+
 
 // Event listener for the "Calculate" button
 document.getElementById("calculateBtn").addEventListener("click", function () {
+  calculationCounter++;
+
+  // Check if the counter reaches 5
+  if (calculationCounter === 5) {
+    // Create and display the pop-up div
+    var popupDiv = document.getElementById("popup");
+    popupDiv.style.display = "block"
+    var overlay = document.getElementById("overlay");
+    overlay.style.display = "block";
+    // Reset the counter
+    // calculationCounter = 0;
+  }
+
   // Clear previous results
   var resultDiv = document.querySelector(".result");
   var selective = document.querySelector(".selective");
@@ -20,8 +54,7 @@ document.getElementById("calculateBtn").addEventListener("click", function () {
     document.getElementById("qartulis_qula").value > 60
   ) {
     alert(
-      `გთხოვთ შეიყვანოთ ქულა 15-იდან 60-მდე, შეყვანილი ქულა ${
-        document.getElementById("qartulis_qula").value
+      `გთხოვთ შეიყვანოთ ქულა 15-იდან 60-მდე, შეყვანილი ქულა ${document.getElementById("qartulis_qula").value
       }`
     );
     return;
@@ -37,8 +70,7 @@ document.getElementById("calculateBtn").addEventListener("click", function () {
     document.getElementById("inglisuris_qula").value > 70
   ) {
     alert(
-      `გთხოვთ შეიყვანოთ ქულა 18-იდან 70-მდე, შეყვანილი ქულა ${
-        document.getElementById("inglisuris_qula").value
+      `გთხოვთ შეიყვანოთ ქულა 18-იდან 70-მდე, შეყვანილი ქულა ${document.getElementById("inglisuris_qula").value
       }`
     );
     return;
@@ -61,8 +93,7 @@ document.getElementById("calculateBtn").addEventListener("click", function () {
         document.getElementById("matematikis_qula").value > 51
       ) {
         alert(
-          `გთხოვთ შეიყვანოთ ქულა 11-იდან 51-მდე, შეყვანილი ქულა ${
-            document.getElementById("matematikis_qula").value
+          `გთხოვთ შეიყვანოთ ქულა 11-იდან 51-მდე, შეყვანილი ქულა ${document.getElementById("matematikis_qula").value
           }`
         );
         return;
@@ -80,8 +111,7 @@ document.getElementById("calculateBtn").addEventListener("click", function () {
         document.getElementById("istoriis_qula").value > 60
       ) {
         alert(
-          `გთხოვთ შეიყვანოთ ქულა 15-იდან 60-მდე, შეყვანილი ქულა ${
-            document.getElementById("istoriis_qula").value
+          `გთხოვთ შეიყვანოთ ქულა 15-იდან 60-მდე, შეყვანილი ქულა ${document.getElementById("istoriis_qula").value
           }`
         );
         return;
@@ -155,16 +185,11 @@ document.getElementById("calculateBtn").addEventListener("click", function () {
     }
   }
 
-  var archeviti_qula;
-
   // Store current calculation
   var currentCalculation = {
     qartulis_qula: document.getElementById("qartulis_qula").value,
     inglisuris_qula: document.getElementById("inglisuris_qula").value,
-    archeviti_qula:
-      subject === "matematika"
-        ? document.getElementById("matematikis_qula").value
-        : document.getElementById("istoriis_qula").value,
+    archeviti_qula: subject === "matematika" ? document.getElementById("matematikis_qula").value : document.getElementById("istoriis_qula").value,
     qartulis_skalirebuli: n11.toFixed(2),
     inglisuris_skalirebuli: n22.toFixed(2),
     matematikis_skalirebuli: subject === "matematika" ? n33.toFixed(2) : null,
@@ -178,23 +203,18 @@ document.getElementById("calculateBtn").addEventListener("click", function () {
   // Add current calculation to the calculations array
   calculations.push(currentCalculation);
 
+
   // Display all calculations
   const prevCalc = document.getElementById("prevCalc");
   prevCalc.innerHTML = "";
-  prevCalc.innerHTML = `<div class="delete-data" id="deleteData"><i class="fa-regular fa-trash-can"></i></i></div>`;
+  prevCalc.innerHTML = `<div class="delete-data" id="deleteData"><i class="fa-regular fa-trash-can"></i></div>`;
   calculations.forEach((calculation, index) => {
     prevCalc.innerHTML += `<p><strong>კალკულაცია ${index + 1}</strong></p>`;
     prevCalc.innerHTML += `<p>ქართული ${calculation.qartulis_qula} -- ს / ქ  ${calculation.qartulis_skalirebuli}</p>`;
     prevCalc.innerHTML += `<p>ინგლისური ${calculation.inglisuris_qula} -- ს / ქ  ${calculation.inglisuris_skalirebuli}</p>`;
-    prevCalc.innerHTML += `<p>${
-      subject === "matematika"
-        ? `მათემატიკა ${calculation.archeviti_qula} -- ს / ქ  ${calculation.n33}`
-        : `ისტორიის ${calculation.archeviti_qula} -- ს / ქ  ${calculation.n44}`
-    }</p>`;
+    prevCalc.innerHTML += `<p>${subject === "matematika" ? `მათემატიკა ${calculation.archeviti_qula} -- ს / ქ  ${calculation.n33}` : `ისტორია ${calculation.archeviti_qula} -- ს / ქ  ${calculation.n44}`}</p>`;
     prevCalc.innerHTML += `<p>თქვენი საგრანტო ქულაა ${calculation.total}</p>`;
-    prevCalc.innerHTML += `<p style="color: ${
-      calculation.grantP !== "არ აქვს" ? "green" : "red"
-    };"> გრანტი - ${calculation.grantP} </p>`;
+    prevCalc.innerHTML += `<p style="color: ${calculation.grantP !== "არ აქვს" ? "green" : "red"};"> გრანტი - ${calculation.grantP} </p>`;
     prevCalc.innerHTML += `<hr>`;
   });
   resultDiv.classList.remove("none");
@@ -207,6 +227,17 @@ document.getElementById("calculateBtn").addEventListener("click", function () {
     const prevCalc = document.getElementById("prevCalc");
     prevCalc.innerHTML = "<h2>არ არის მონაცემი</h2>"; // Clear previous calculations HTML
   }
+
+  function handleSubjectChange() {
+    calculations = []; // Clear previous calculations
+    const prevCalc = document.getElementById("prevCalc");
+    prevCalc.innerHTML = "<h2>არ არის მონაცემი</h2>"; // Clear previous calculations HTML
+  }
+
+  // Attach the event listener to the subject select element
+  var subjectElement = document.getElementById("subject");
+  subjectElement.addEventListener("change", handleSubjectChange);
+
 
   const againBtn = document.createElement("button");
   resultDiv.appendChild(againBtn);
@@ -300,12 +331,13 @@ function toggleMenu() {
     burgerMenu.style.fontSize = "30px";
     burgerMenu.style.padding = "20px 0px 0px 20px";
   } else {
-    burgerMenu.innerHTML = `<i class="fa-solid fa-list-ol"></i></i>`;
+    burgerMenu.innerHTML = `<i class="fa-solid fa-list-ol"></i>`;
     burgerMenu.style.backgroundColor = "";
     burgerMenu.style.fontSize = "";
     burgerMenu.style.padding = "10px 20px";
   }
 }
+
 
 document.addEventListener("DOMContentLoaded", function () {
   // Fetch the data from data.json
@@ -356,18 +388,78 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-// Function to delete the welcome message
-// document.getElementById("deleteMessageBtn").addEventListener("click", function () {
-//   var welcomeMessage = document.getElementById("welcomeMessage");
-//   var overlay = document.getElementById("overlay");
-//   welcomeMessage.style.display = "none";
-//   overlay.style.display = "none";
-// });
+// Show welcome message when the page loads
+window.onload = function () {
+  var welcomeMessage = document.getElementById("welcomeMessage");
+  var overlay = document.getElementById("overlay");
+  welcomeMessage.style.display = "block";
+  overlay.style.display = "block";
+};
 
-// // Show welcome message when the page loads
-// window.onload = function () {
-//   var welcomeMessage = document.getElementById("welcomeMessage");
-//   var overlay = document.getElementById("overlay");
-//   welcomeMessage.style.display = "block";
-//   overlay.style.display = "block";
-// };
+const shareUs = document.getElementById("shareUs")
+
+shareUs.addEventListener('click', function(){
+  var popupDiv = document.getElementById("popup");
+  popupDiv.style.display = "block"
+  var overlay = document.getElementById("overlay");
+  overlay.style.display = "block";
+})
+
+// Function to delete the welcome message
+document.getElementById("deleteMessageBtn").addEventListener("click", function () {
+  var welcomeMessage = document.getElementById("welcomeMessage");
+  var overlay = document.getElementById("overlay");
+  welcomeMessage.style.display = "none";
+  overlay.style.display = "none";
+});
+
+function shareOnFacebook() {
+  var shareUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(window.location.href);
+  window.open(shareUrl, '_blank', 'toolbar=0,status=0,width=626,height=436');
+}
+
+function shareOnMessenger() {
+  var shareUrl = 'fb-messenger://share/?link=' + encodeURIComponent(window.location.href) + '&app_id=123456789';
+  window.open(shareUrl);
+}
+
+function shareOnTwitter() {
+  var shareUrl = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(window.location.href);
+  window.open(shareUrl, '_blank', 'toolbar=0,status=0,width=626,height=436');
+}
+
+function shareOnLinkedIn() {
+  var shareUrl = 'https://www.linkedin.com/shareArticle?url=' + encodeURIComponent(window.location.href);
+  window.open(shareUrl, '_blank', 'toolbar=0,status=0,width=626,height=436');
+}
+
+function shareOnPinterest() {
+  var shareUrl = 'https://pinterest.com/pin/create/button/?url=' + encodeURIComponent(window.location.href);
+  window.open(shareUrl, '_blank', 'toolbar=0,status=0,width=626,height=436');
+}
+
+function shareOnWhatsApp() {
+  var shareUrl = 'whatsapp://send?text=' + encodeURIComponent(window.location.href);
+  window.open(shareUrl);
+}
+
+function shareOnReddit() {
+  var shareUrl = 'https://www.reddit.com/submit?url=' + encodeURIComponent(window.location.href);
+  window.open(shareUrl, '_blank', 'toolbar=0,status=0,width=626,height=436');
+}
+
+function shareOnGmail() {
+  var subject = 'Check out this website';
+  var body = 'I found this website and thought you might be interested: ' + window.location.href;
+  var mailtoUrl = 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  window.location.href = mailtoUrl;
+}
+
+document.getElementById("closePopupBtn").addEventListener('click', function () {
+  var popupDiv = document.getElementById("popup");
+  popupDiv.style.display = "none"
+  var overlay = document.getElementById("overlay");
+  overlay.style.display = "none";
+})
+
+

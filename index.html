@@ -4,42 +4,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Grade Calculator</title>
+  <title>gavigrante.ge</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="shortcut icon" href="./favicon_io/android-chrome-512x512.png" type="image/x-icon">
 </head>
 
 <body>
+  <div id="box">
+      <svg>
+        <text x="50%" y="50%" dy=".35em" text-anchor="middle">
+          გავიგრანტე ? 
+        </text>
+      </svg>
+  </div>
   <div class="header">
-    <div class="header-list">
-      <ol>
-        <li><a href="./">მთავარი</a></li>
-        <li><a href="">პოსტები</a></li>
-        <li><a href="">კონტაქტი</a></li>
-        <li><a href="">რეგისტრაცია</a></li>
-      </ol>
+    <button class="share-us" id="shareUs">Share Us</button>
+    <div class="header-right">
       <button class="mode-change" id="modeChange">Dark Mode</button>
+      <button class="burger-menu" id="burgerMenu" onclick="toggleMenu()"> <i class="fa-solid fa-list-ol"></i></i></button>
     </div>
-    <button class="burger-menu" id="burgerMenu" onclick="toggleMenu()"> <i class="fa-solid fa-list-ol"></i></i> </button>
   </div>
   <div class="previous-calculations" id="prevCalc">
     <h2>არ არის მონაცემი</h2>
   </div>
-  <!-- <div id="overlay"></div>
+  <div id="overlay"></div>
   <div class="center">
     <div class="welcome-message" id="welcomeMessage">
       <div class="okay">
         <h1>გავიგრანტე ?</h1>
         <p>
-          მოგეხსენებათ, რომ აღნიშნული აპლიკაცია 100% იანი სიზუსტით ვერ გამოთვლის გრანტს. გრანტის მიღება დამოკიდებულია სხვა
+          მოგეხსენებათ, რომ აღნიშნული აპლიკაცია 100% იანი სიზუსტით ვერ გამოთვლის გრანტს. გრანტის მიღება დამოკიდებულია
+          სხვა
           აბიტურიენტების რაოდენობასა და კონკურენციაზე.
-          აპლიკაცია შექმნილია 2023 წლის შედეგების მიხედვით, იხილეთ დეტალური ინფორმაცია სკალირებული ქულის გამოთვლის მეთოდის
-          შესახებ.
+          აპლიკაცია შექმნილია 2023 წლის შედეგების მიხედვით,
+          <a href="http://tinyurl.com/3xev3kvs" target="_blank">
+            იხილეთ დეტალური ინფორმაცია სკალირებული ქულის გამოთვლის მეთოდის
+            შესახებ.
+          </a>
         </p>
-        <button id="deleteMessageBtn">დაწყება</button>
+        <button class="btn" id="deleteMessageBtn">დაწყება</button>
       </div>
+    </div>
   </div>
-  </div> -->
   <div id="quote-container">
     <p id="quote-text"></p>
     <p id="quote-author"></p>
@@ -52,19 +61,41 @@
       <input type="number" id="inglisuris_qula" step="1"><br>
       <label for="subject">არჩევითი საგანი:</label>
       <select id="subject">
-        <option value="" disabled selected>არჩევა</option>
+        <option value="" disabled selected> -- არჩევა -- </option>
         <option value="matematika">მათემატიკა</option>
         <option value="istoria">ისტორია</option>
       </select><br>
       <div id="optional_subject_container"></div><br>
-      <button id="calculateBtn" class="btn">გამოთვლა</button>
-      <button class="combination" id="generateBtn"> საგრანტო კომბინაცია</button>
+      <button class="btn" id="calculateBtn">გამოთვლა</button>
+      <button class="btn combination" id="generateBtn"> საგრანტო კომბინაცია</button>
     </div>
     <div class="result"></div>
   </div>
-  <!-- <footer>
-    <h3>copyright Piro Kobuladze</h3>
-  </footer> -->
+  <div id="popup" class="popup">
+    <h1>გავიგრანტე ?</h1>
+    <p>
+      ძვირფასო მომხმარებელო, გაითვალისწინე რომ ეს პროექტი შექმნილია აბიტურიენტებისთვის, და მათთვის ვისაც
+      სურს ჩააბაროს ერთიანი ეროვნული გამოცდები, პროგრამა არის სრულიად უფასო, თუმცა მასში დიდი შრომაა ჩადებული ამიტომ, თუ მოგწონს აპლიკაცია გთხოვ
+      გაუზიარო მეგობრებს და დაგვეხმარო განვითარებაში 🙏🏼
+    </p>
+    <div class="share-buttons">
+      <button onclick="shareOnFacebook()" class="share-btn facebook">Share on Facebook</button>
+      <button onclick="shareOnMessenger()" class="share-btn messenger">Share on Messenger</button>
+      <button onclick="shareOnGmail()" class="share-btn gmail">Share via Gmail</button>
+      <button onclick="shareOnLinkedIn()" class="share-btn linkedin">Share on LinkedIn</button>
+      <button onclick="shareOnWhatsApp()" class="share-btn whatsapp">Share on WhatsApp</button>
+    </div>
+    <br>
+    <div class="popup-close-btn">
+      <button id="closePopupBtn" class="close-btn">Close</button>
+    </div>
+  </div>
+  <footer>
+    <a href="https://www.facebook.com/piro.qobuladze.3" target="_blank">
+      2024 © Unify -
+      by Piro Kobuladze
+    </a>
+  </footer>
   <script src="script.js"></script>
 </body>
 
